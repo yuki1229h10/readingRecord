@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>ホーム</title>
@@ -8,7 +8,7 @@
 	<h2>ホーム</h2>
 	<hr />
 	<div>
-		<a href="#">記録</a>
+		<a th:href="@{/books}">記録</a>
 	</div>
 </body>
 </html>

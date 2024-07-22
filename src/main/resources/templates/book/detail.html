@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>書籍詳細</title>
+<link
+	th:href="@{/style.css}"
+	rel="stylesheet">
 </head>
 <body>
-
+	<h2>書籍詳細</h2>
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<td th:text="${book.id}"></td>
+		</tr>
+		<tr>
+			<th>タイトル</th>
+			<td th:text="${book.title}"></td>
+		</tr>
+		<tr>
+			<th>メモ</th>
+			<td th:text="${book.memo}"></td>
+		</tr>
+		<tr>
+			<th>ステータス</th>
+			<td th:text="${book.status}"></td>
+		</tr>
+		<tr>
+			<th>作成日時</th>
+			<td
+				th:text="${book.createdAt.format(T(java.time.format.DateTimeFormatter).ofPattern('yyyy/MM/dd HH:mm:ss'))}"></td>
+		</tr>
+		<tr>
+			<th>更新日時</th>
+			<td
+				th:text="${book.updatedAt.format(T(java.time.format.DateTimeFormatter).ofPattern('yyyy/MM/dd HH:mm:ss'))}"></td>
+		</tr>
+	</table>
+	<div>
+		<a th:href="@{/books}">戻る</a>
+	</div>
 </body>
 </html>

@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>書籍一覧</title>
+<link
+	th:href="@{/style.css}"
+	rel="stylesheet">
 </head>
 <body>
-s
+	<h2>書籍一覧</h2>
+	<p
+		th:if="${errorMessage}"
+		th:text="${errorMessage}"
+		style="color: red;"></p>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>タイトル</th>
+				<th>メモ</th>
+				<th>ステータス</th>
+				<th>作成日</th>
+				<th>更新日</th>
+				<th>詳細</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="book:${books}">
+				<td th:text="${book.title}"></td>
+				<td th:text="${book.memo}"></td>
+				<td th:text="${book.status}"></td>
+				<td th:text="${book.createdAt}"></td>
+				<td th:text="${book.updatedAt}"></td>
+				<td><a th:href="@{/books/{id}(id=${book.id})}">詳細</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<a th:href="@{/}">戻る</a>
+	</div>
 </body>
 </html>

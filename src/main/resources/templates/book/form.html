@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>書籍フォーム</title>
+<link
+	th:href="@{/style.css}"
+	rel="stylesheet">
+</head>
+<body>
+	<h2 th:if="${bookForm.isNew}">本の登録</h2>
+	<h2 th:unless="${bookForm.isNew}">本の編集</h2>
+	<form
+		th:action="${bookForm.isNew} ? @{/books/save} : @{/books/update}"
+		th:object="${bookForm}"
+		method="post">
+		<input
+			type="hidden"
+			th:field="*{id}">
+		<table>
+			<tr>
+				<th>タイトル</th>
+				<td><input
+					type="text"
+					th:field="*{title}"></td>
+			</tr>
+			<tr>
+				<th>メモ</th>
+				<td><textarea
+						rows="5"
+						cols="30"
+						th:field="*{memo}"></textarea></td>
+			</tr>
+			<tr>
+				<th>ステータス</th>
+				<td><select th:field="*{status}">
+						<option
+							th:each="status : ${T(com.example.readingRecord.entity.Status).values()}"
+							th:value="${status}"
+							th:text="${status}"></option>
+				</select></td>
+			</tr>
+		</table>
+		<input
+			th:if="${bookForm.isNew}"
+			type="submit"
+			value="登録"> <input
+			th:unless="${bookForm.isNew}"
+			type="submit"
+			value="更新">
+	</form>
+	<div>
+		<a th:href="@{/books}">戻る</a>
+	</div>
+</body>
+</html>

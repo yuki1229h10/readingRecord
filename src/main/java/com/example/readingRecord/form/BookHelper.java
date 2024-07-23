@@ -1,7 +1,6 @@
-package com.example.readingRecord;
+package com.example.readingRecord.form;
 
 import com.example.readingRecord.entity.Book;
-import com.example.readingRecord.form.BookForm;
 
 public class BookHelper {
 

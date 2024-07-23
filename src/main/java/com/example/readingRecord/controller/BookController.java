@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.readingRecord.BookHelper;
 import com.example.readingRecord.entity.Book;
 import com.example.readingRecord.form.BookForm;
+import com.example.readingRecord.form.BookHelper;
 import com.example.readingRecord.service.BookService;
 
 import lombok.RequiredArgsConstructor;
@@ -60,7 +60,7 @@ public class BookController {
 		Book target = bookService.findBookById(id);
 		if (target != null) {
 			BookForm form = BookHelper.convertBookForm(target);
-			model.addAttribute("BookForm", form);
+			model.addAttribute("bookForm", form);
 			return "book/form";
 		} else {
 			attributes.addFlashAttribute("errorMessage", "対象データがありません");
@@ -73,6 +73,13 @@ public class BookController {
 		Book book = BookHelper.convertBook(form);
 		bookService.updateBook(book);
 		attributes.addFlashAttribute("message", "本が更新されました");
+		return "redirect:/books";
+	}
+
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable Integer id, RedirectAttributes attributes) {
+		bookService.deleteBook(id);
+		attributes.addFlashAttribute("message", "本が削除されました");
 		return "redirect:/books";
 	}
 }

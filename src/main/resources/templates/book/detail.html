@@ -37,8 +37,14 @@
 				th:text="${book.updatedAt.format(T(java.time.format.DateTimeFormatter).ofPattern('yyyy/MM/dd HH:mm:ss'))}"></td>
 		</tr>
 	</table>
-	<div>
-		<a th:href="@{/books}">戻る</a>
-	</div>
+	<a th:href="@{/books/edit/{id}(id=${book.id})}">編集</a>
+	<form
+		th:action="@{/books/delete/{id}(id=${book.id})}"
+		method="post">
+		<input
+			type="submit"
+			value="削除">
+	</form>
+	<a th:href="@{/books}">戻る</a>
 </body>
 </html>

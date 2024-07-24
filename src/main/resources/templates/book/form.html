@@ -22,7 +22,10 @@
 				<th>タイトル</th>
 				<td><input
 					type="text"
-					th:field="*{title}"></td>
+					th:field="*{title}"> <span
+					th:if="${fields.hasErrors('title')}"
+					th:errors="*{title}"
+					style="color: red;"></span></td>
 			</tr>
 			<tr>
 				<th>メモ</th>

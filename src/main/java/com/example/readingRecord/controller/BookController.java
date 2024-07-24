@@ -2,6 +2,8 @@ package com.example.readingRecord.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +50,11 @@ public class BookController {
 	}
 
 	@PostMapping("/save")
-	public String create(BookForm form, RedirectAttributes attributes) {
+	public String create(@Validated BookForm form, BindingResult bindingResult, RedirectAttributes attributes) {
+		if (bindingResult.hasErrors()) {
+			form.setIsNew(true);
+			return "book/form";
+		}
 		Book book = BookHelper.convertBook(form);
 		bookService.insertBook(book);
 		attributes.addFlashAttribute("message", "新しい本が登録されました");
@@ -69,7 +75,11 @@ public class BookController {
 	}
 
 	@PostMapping("/update")
-	public String update(BookForm form, RedirectAttributes attributes) {
+	public String update(@Validated BookForm form, BindingResult bindingResult, RedirectAttributes attributes) {
+		if (bindingResult.hasErrors()) {
+			form.setIsNew(false);
+			return "book/form";
+		}
 		Book book = BookHelper.convertBook(form);
 		bookService.updateBook(book);
 		attributes.addFlashAttribute("message", "本が更新されました");

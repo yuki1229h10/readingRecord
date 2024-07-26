@@ -23,7 +23,7 @@
 				<td><input
 					type="text"
 					th:field="*{title}"> <span
-					th:if="${fields.hasErrors('title')}"
+					th:if="${#fields.hasErrors('title')}"
 					th:errors="*{title}"
 					style="color: red;"></span></td>
 			</tr>
@@ -32,7 +32,10 @@
 				<td><textarea
 						rows="5"
 						cols="30"
-						th:field="*{memo}"></textarea></td>
+						th:field="*{memo}"></textarea><span
+					th:if="${#fields.hasErrors('memo')}"
+					th:errors="*{memo}"
+					style="color: red;"></span></td>
 			</tr>
 			<tr>
 				<th>ステータス</th>

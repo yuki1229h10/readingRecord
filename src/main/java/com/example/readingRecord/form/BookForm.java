@@ -15,7 +15,7 @@ public class BookForm {
 	private Integer id;
 	@NotBlank(message = "タイトルは必須です。")
 	private String title;
-	@Size(min = 1, max = 200, message = "メモは{min}~{max}文字以内で入力してください。")
+	@Size(max = 200, message = "メモは{max}文字以内で入力してください。")
 	private String memo;
 	private Status status;
 	private Boolean isNew;
